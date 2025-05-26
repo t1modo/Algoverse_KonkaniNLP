@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pruning for Performance</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+        "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    .center {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .center h1 {
+      font-size: 2rem;
+    }
+
+    .center p {
+      font-size: 1.2rem;
+    }
+
+    .btn {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      margin: 0 10px;
+      display: inline-block;
+    }
+
+    .abstract {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .abstract h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .abstract p {
+      font-size: 1rem;
+      color: #333;
+      text-align: left;
+    }
+
+    .rep-figure-container {
+      text-align: center;
+      margin: 30px auto;
+      max-width: 800px; /* Add a container constraint */
+    }
+
+    .rep-figure-container figure {
+      display: inline-block; /* This keeps the figure centered and constrains it to content width */
+      margin: 0;
+    }
+
+    .rep-figure-container img {
+      width: 70%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .rep-figure-container figcaption {
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 10px;
+      text-align: center;
+      padding: 0;
+      max-width: 100%; /* This ensures caption doesn't exceed the figure width */
+      word-wrap: break-word; /* Helps with text wrapping */
+    }
+
+    .image-grid-container {
+      max-width: 800px;
+      margin: 40px auto 60px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .image-row img {
+      width: 48%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .pruning {
+      max-width: 800px;
+      margin: 40px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    .pruning h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    figure figcaption {
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 10px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .results {
+      max-width: 900px;
+      margin: 60px auto 80px auto;
+      padding: 0 20px;
+    }
+
+    .results h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .results table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+
+    .results th,
+    .results td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .results th {
+      background-color: #f4f4f4;
+    }
+
+    .results caption {
+      caption-side: bottom;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center">
+    <h1><strong>Pruning for Performance: Efficient Idiom and Metaphor Classification in Low-Resource Konkani Using mBERT</strong></h1>
+    <p>
+      <a href="https://www.linkedin.com/in/timothykhangdo/" style="color: #007bff;">Timothy Do</a>,
+      <a href="https://www.linkedin.com/in/pranav-saran-79b45b326/" style="color: #007bff;">Pranav Saran</a>,
+      <a href="https://www.linkedin.com/in/harshitapoojary/" style="color: #007bff;">Harshita Poojary</a>,
+      <a href="https://www.linkedin.com/in/pranavbprabhu/" style="color: #007bff;">Pranav Prabhu</a>,
+      <a href="https://www.linkedin.com/in/sean-obrien-research/" style="color: #007bff;">Sean O'Brien</a>,
+      <a href="https://www.linkedin.com/in/vasu-sharma-6b460592/" style="color: #007bff;">Vasu Sharma</a>,
+      <a href="https://www.linkedin.com/in/zhu-kevin1/" style="color: #007bff;">Kevin Zhu</a>
+    </p>
+    <p>Algoverse AI Research</p>
+
+    <div>
+      <a class="btn" href="#">Paper</a>
+      <a class="btn" href="#">arXiv</a>
+      <a class="btn" href="https://anonymous.4open.science/r/KonkaniNLP">Code</a>
+    </div>
+  </div>
+
+  <div class="rep-figure-container">
+    <figure>
+      <img src="results/figures/Representative_Figure.png" />
+      <figcaption>
+        <em>
+          Processing of Konkani metaphorical expressions using mBERT+BiLSTM. The phrase highlighted in red is analyzed for metaphorical content, with contrasting classification outcomes shown.
+        </em>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      In this paper, we address the persistent challenges that figurative language expressions pose for natural language processing (NLP) systems, particularly in low-resource languages such as Konkani. We present a hybrid model that integrates a pre-trained Multilingual BERT (mBERT) with a bidirectional LSTM and a linear classifier. This architecture is fine-tuned on a newly introduced annotated dataset for metaphor classification, developed as part of this work. To improve the model's efficiency, we implement a gradient-based attention head pruning strategy. For metaphor classification, the pruned model achieves an accuracy of 78%. We also applied our pruning approach to expand on an existing idiom classification task, achieving 83% accuracy. These results demonstrate the effectiveness of attention head pruning for building efficient NLP tools in underrepresented languages.
+    </p>
+  </div>
+
+  <div class="pruning">
+    <h2>Attention Head Importance Pruning</h2>
+  </div>
+
+  <div class="image-grid-container">
+    <div class="image-row">
+      <img src="results/figures/Idiom_Classification_Colored_Heatmap.png" />
+      <img src="results/figures/Metaphor_Classification_Colored_Heatmap.png" />
+    </div>
+    <figure>
+      <figcaption>
+        <em>
+          Heatmaps showing attention head importance scores across layers for idiom (left) and metaphor (right) classification. Idiom classification shows higher importance values in earlier layers compared to later ones, while metaphor classification exhibits a higher importance score near the center of the heatmap.
+        </em>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="results">
+    <h2>Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Metric</th>
+          <th colspan="2">Idiom Classification</th>
+          <th colspan="2">Metaphor Classification</th>
+        </tr>
+        <tr>
+          <th>Original Model</th>
+          <th>Pruned Model</th>
+          <th>Original Model</th>
+          <th>Pruned Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Precision</td><td>0.87</td><td>0.86</td><td>1.00</td><td>0.87</td></tr>
+        <tr><td>Recall</td><td>0.89</td><td>0.91</td><td>0.75</td><td>0.65</td></tr>
+        <tr><td>F1-Score</td><td>0.88</td><td>0.88</td><td>0.86</td><td>0.74</td></tr>
+        <tr><td>Accuracy</td><td>0.82</td><td>0.83</td><td>0.88</td><td>0.78</td></tr>
+        <tr><td>Macro Avg Precision</td><td>0.78</td><td>0.79</td><td>0.90</td><td>0.79</td></tr>
+        <tr><td>Macro Avg Recall</td><td>0.77</td><td>0.77</td><td>0.88</td><td>0.78</td></tr>
+        <tr><td>Weighted Avg Precision</td><td>0.82</td><td>0.82</td><td>0.90</td><td>0.79</td></tr>
+        <tr><td>Weighted Avg Recall</td><td>0.82</td><td>0.83</td><td>0.88</td><td>0.78</td></tr>
+      </tbody>
+      <caption>
+        <em>
+          Comparison of original and pruned mBERT+BiLSTM models on idiom and metaphor classification. Idiom performance remains stable post-pruning, while metaphor classification shows metric drops, reflecting its reliance on a broader set of attention heads and the need for task-specific pruning strategies.
+        </em>
+      </caption>
+    </table>
+  </div>
+
+</body>
+</html>
