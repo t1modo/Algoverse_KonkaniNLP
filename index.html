@@ -204,13 +204,13 @@
     <p>Algoverse AI Research</p>
 
     <div>
-      <a class="btn" href="#">
+      <a class="btn" href="https://arxiv.org/pdf/2506.02005">
         <span class="icon">
           <i class="fas fa-file-pdf"></i>
         </span>
         <span>Paper</span>
       </a>
-      <a class="btn" href="#">
+      <a class="btn" href="https://arxiv.org/abs/2506.02005">
         <span class="icon">
           <i class="ai ai-arxiv"></i>
         </span>
@@ -294,6 +294,61 @@
       </caption>
     </table>
   </div>
+
+<div class="citation" style="max-width:1000px;margin:40px auto 80px auto;padding:0 20px;text-align:center;">
+  <h2 style="font-size:2rem;text-align:center;margin-bottom:10px;font-weight:700;">BibTeX Citation</h2>
+  <div style="display:flex;justify-content:center;">
+    <div style="position:relative;display:inline-block;width:100%;max-width:900px;background:#f6f8fa;border-radius:8px;">
+      <button id="copyBibtexBtn" title="Copy BibTeX" style="
+        position:absolute;
+        top:16px;
+        right:16px;
+        background:transparent;
+        border:none;
+        cursor:pointer;
+        padding:4px;
+        z-index:2;
+      ">
+        <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+      </button>
+      <pre id="bibtexText" style="
+        margin:0;
+        padding:56px 32px 20px 32px; /* Top padding moves text down, bottom padding reduced */
+        font-size:1.05rem;
+        text-align:left;
+        width:100%;
+        box-sizing:border-box;
+        white-space:pre-wrap;
+        word-break:break-all;
+        background:transparent;
+        border-radius:8px;
+      ">
+@misc{do2025pruningperformanceefficientidiom,
+  title={Pruning for Performance: Efficient Idiom and Metaphor Classification in Low-Resource Konkani Using mBERT},
+  author={Timothy Do and Pranav Saran and Harshita Poojary and Pranav Prabhu and Sean O'Brien and Vasu Sharma and Kevin Zhu},
+  year={2025},
+  eprint={2506.02005},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2506.02005}
+}
+      </pre>
+    </div>
+  </div>
+</div>
+
+  <script>
+  document.getElementById('copyBibtexBtn').onclick = function() {
+    const bibtex = document.getElementById('bibtexText').innerText.trim();
+    navigator.clipboard.writeText(bibtex).then(() => {
+      this.title = "Copied!";
+      setTimeout(() => { this.title = "Copy BibTeX"; }, 1200);
+    });
+  };
+  </script>
 
 </body>
 </html>
